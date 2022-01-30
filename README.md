@@ -23,5 +23,5 @@ Run the following command to start the project:
 
 ![Demo](https://github.com/Microsoft/vscode-chrome-debug/blob/master/images/demo.gif?raw=true)
 
-![sdfs](./Screen_Recording_2022_01_30_at_161451.mp4?raw=true)
+![sdfs](./Screen_Recording_2022_01_30_at_161451.gif)
 
