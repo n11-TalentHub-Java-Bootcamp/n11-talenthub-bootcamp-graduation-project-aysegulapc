@@ -55,6 +55,10 @@ https://user-images.githubusercontent.com/23243392/151710511-16c11b5f-3940-4c4d-
 When a user is deleted from the table, the credit result of that user is also deleted from the table.
 The video below shows the deletion process.
 
+
+https://user-images.githubusercontent.com/23243392/151710982-086f2261-9137-49ef-a9c6-1d0d19390086.mov
+
+
 ### 4- Search User
 
 
@@ -62,5 +66,19 @@ User can be searched according to TC number and birthday. If the date of birth a
 it gives a "User not found" error. The video below shows a search process from the table.
 
 
+https://user-images.githubusercontent.com/23243392/151711011-44ccf4e9-f999-4cdd-bdc0-154fc19881c6.mov
+
+### 5- Send SMS
+
+After the user is registered, an SMS is sent to the relevant phone number. The transaction is carried out with 
+a Twilio trial account.
+
+The following message is for the first registered user:
+
+![whatsapp-image-2022-01-30-at-2](https://user-images.githubusercontent.com/23243392/151711284-0c360230-14f7-4209-89e5-48673bb01410.jpg)
+
+The following message is for the second registered user:
+
+![Webp net-resizeimage (2)](https://user-images.githubusercontent.com/23243392/151711409-9e86e4fc-f965-4e4d-9e65-8e415b1f1bd1.jpg)
 
 
