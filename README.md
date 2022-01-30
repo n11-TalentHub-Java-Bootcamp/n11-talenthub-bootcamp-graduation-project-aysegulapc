@@ -50,5 +50,17 @@ it is seen that the credit result of a user whose information has been updated i
 
 https://user-images.githubusercontent.com/23243392/151710511-16c11b5f-3940-4c4d-a3ee-3f634f8c5994.mov
 
+### 3- Delete User And Credit Result
+
+When a user is deleted from the table, the credit result of that user is also deleted from the table.
+The video below shows the deletion process.
+
+### 4- Search User
+
+
+User can be searched according to TC number and birthday. If the date of birth and the tc number do not match, 
+it gives a "User not found" error. The video below shows a search process from the table.
+
+
 
 
