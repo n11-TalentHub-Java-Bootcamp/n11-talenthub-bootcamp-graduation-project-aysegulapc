@@ -22,13 +22,23 @@ public class CreditController {
 
     private final CreditEntityService creditEntityService;
 
+    /**
+     *  Gets all users with join user and users' credit information.
+     * @return ResponseEntity
+     */
     @GetMapping("/users")
     public ResponseEntity getAllUsersCreditDetails() {
         List<UsersCreditDetailsDto> usersCreditDetailList =
                 creditEntityService.findAllUsersCreditDetailList();
         return ResponseEntity.ok(usersCreditDetailList);
     }
-
+    
+    /**
+     * Gets user by tcno and birthdate.
+     * @param tcno
+     * @param birthdate
+     * @return ResponseEntity
+     */
     @GetMapping("/{tcno}/{birthdate}")
     public ResponseEntity getCreditResultByTCNoAndBirthdate(@PathVariable Long tcno,
                                                             @PathVariable("birthdate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate birthdate) {
@@ -37,6 +47,11 @@ public class CreditController {
         return ResponseEntity.ok(userByTcNoAndBirthdate);
     }
 
+    /**
+     * Gets user's credit score.
+     * @param userDto
+     * @return ResponseEntity
+     */
     @GetMapping("/creditScore")
     public ResponseEntity getCreditScoreByUserId(@RequestParam UserDto userDto) {
         Long creditScore = creditEntityService.getUserCreditScore(userDto);
