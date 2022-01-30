@@ -36,7 +36,7 @@ public class CreditEntityService extends BaseEntityService<CreditResponse, Credi
     public List<UsersCreditDetailsDto> findAllUsersCreditDetailList() {
         List<UsersCreditDetailsDto> usersCreditDetailList = getRepository().findAllUsersCreditDetailList();
         return new ArrayList<>(usersCreditDetailList.stream()
-                .collect(Collectors.toMap(a -> a.getName().toLowerCase(),
+                .collect(Collectors.toMap(UsersCreditDetailsDto::getId,
                         Function.identity(),
                         (user, user2) -> user.getSavedDate().compareTo(user2.getSavedDate()) > 0 ? user : user2))
                 .values());

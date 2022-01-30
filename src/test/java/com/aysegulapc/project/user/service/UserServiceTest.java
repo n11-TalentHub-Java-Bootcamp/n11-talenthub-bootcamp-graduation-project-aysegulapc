@@ -23,11 +23,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -50,6 +48,9 @@ class UserServiceTest {
 
     @Mock
     private UserConverter userConverter;
+
+    @Mock
+    private CreditEntityService creditEntityService;
 
     @InjectMocks
     private UserService userService;

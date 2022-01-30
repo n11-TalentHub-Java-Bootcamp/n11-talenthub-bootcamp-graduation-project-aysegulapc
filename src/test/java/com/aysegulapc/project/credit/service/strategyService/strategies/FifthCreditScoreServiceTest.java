@@ -46,7 +46,6 @@ class FifthCreditScoreServiceTest {
         CreditResponseDto creditResponseDto = CreditDataProvider.getFifthCreditResponseDto(user.getId());
 
         when(userCreditScoreService.findCreditScore(user.getId())).thenReturn(creditScore);
-        when(userEntityService.getById(user.getId())).thenReturn(user);
         when(creditService.createCreditResponseDtoByStrategy(
                 user,
                 user.getId(),

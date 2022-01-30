@@ -45,7 +45,6 @@ class SecondCreditScoreServiceTest {
         CreditResponseDto creditResponseDto = CreditDataProvider.getSecondCreditResponseDto(user.getId());
 
         when(userCreditScoreService.findCreditScore(user.getId())).thenReturn(creditScore);
-        when(userEntityService.getById(user.getId())).thenReturn(user);
         when(creditService.createCreditResponseDtoByStrategy(
                 user,
                 user.getId(),
