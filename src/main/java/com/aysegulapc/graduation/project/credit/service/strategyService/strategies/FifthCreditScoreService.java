@@ -28,7 +28,7 @@ public class FifthCreditScoreService implements CreditStrategy {
 
     @Override
     public void calculateCreditResult(User user) {
-        Long creditScore = userCreditScoreService.findCreditScore(user.getId());
+        Long creditScore = userCreditScoreService.findCreditScore(user);
 
         if(creditScore >= 1000L) {
             log.info("User's information is in the fifth strategy service.");

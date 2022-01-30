@@ -23,8 +23,8 @@ public class UserCreditScoreService {
      * is 678.
      */
 
-    public Long findCreditScore(Long id) {
-        User user = userEntityService.getById(id);
+    public Long findCreditScore(User user) {
+        //User user = userEntityService.getById(id);
         if(user == null) {
             throw new UserNotFoundException("User not found!");
         }

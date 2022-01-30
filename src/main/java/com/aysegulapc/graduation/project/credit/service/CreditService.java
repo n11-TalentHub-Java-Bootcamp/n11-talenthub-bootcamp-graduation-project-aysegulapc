@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +40,10 @@ public class CreditService {
                 .savedDate(new Date(System.currentTimeMillis()))
                 .userId(id)
                 .build();
-        if(user.getGuaranteeAmount().compareTo(BigDecimal.ZERO) > 0 && creditScore > 500L) {
+        if(user.getGuaranteeAmount() == null || Objects.equals(user.getGuaranteeAmount(), new BigDecimal(0))) {
+            user.setGuaranteeAmount(new BigDecimal(0));
+        }
+        else if (user.getGuaranteeAmount().compareTo(BigDecimal.ZERO) > 0 && creditScore > 500L) {
             BigDecimal result = user.getGuaranteeAmount()
                     .divide(new BigDecimal(100))
                     .multiply(new BigDecimal(guaranteeRate));

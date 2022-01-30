@@ -27,7 +27,7 @@ public class ThirdCreditScoreService implements CreditStrategy {
 
     @Override
     public void calculateCreditResult(User user) {
-        Long creditScore = userCreditScoreService.findCreditScore(user.getId());
+        Long creditScore = userCreditScoreService.findCreditScore(user);
         BigDecimal salary = user.getSalary();
         int resLowerLimit = salary.compareTo(new BigDecimal(5000));
         int resUpperLimit = salary.compareTo(new BigDecimal(10000));

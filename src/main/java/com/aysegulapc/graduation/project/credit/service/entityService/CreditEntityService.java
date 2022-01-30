@@ -4,8 +4,12 @@ import com.aysegulapc.graduation.project.common.service.BaseEntityService;
 import com.aysegulapc.graduation.project.credit.dto.UsersCreditDetailsDto;
 import com.aysegulapc.graduation.project.credit.entity.CreditResponse;
 import com.aysegulapc.graduation.project.credit.repository.CreditRepository;
+import com.aysegulapc.graduation.project.credit.service.UserCreditScoreService;
+import com.aysegulapc.graduation.project.user.converter.UserConverter;
+import com.aysegulapc.graduation.project.user.dto.UserDto;
 import com.aysegulapc.graduation.project.user.entity.User;
 import com.aysegulapc.graduation.project.user.service.entityService.UserEntityService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +28,8 @@ import java.util.stream.Collectors;
 @CrossOrigin
 @Slf4j
 public class CreditEntityService extends BaseEntityService<CreditResponse, CreditRepository> {
-    @Autowired
     private UserEntityService userEntityService;
+    private UserCreditScoreService userCreditScoreService;
 
     private static final Logger logger = LoggerFactory.getLogger(CreditEntityService.class);
 
@@ -33,8 +37,14 @@ public class CreditEntityService extends BaseEntityService<CreditResponse, Credi
         super(repository);
     }
 
+    public Long getUserCreditScore(UserDto userdto) {
+        User user = UserConverter.INSTANCE.convertUserDtoToUser(userdto);
+        return userCreditScoreService.findCreditScore(user);
+    }
+
     public List<UsersCreditDetailsDto> findAllUsersCreditDetailList() {
         List<UsersCreditDetailsDto> usersCreditDetailList = getRepository().findAllUsersCreditDetailList();
+        logger.info("Users Credit Detail List {}", usersCreditDetailList);
         return new ArrayList<>(usersCreditDetailList.stream()
                 .collect(Collectors.toMap(UsersCreditDetailsDto::getId,
                         Function.identity(),
@@ -45,7 +55,7 @@ public class CreditEntityService extends BaseEntityService<CreditResponse, Credi
     public UsersCreditDetailsDto findUserByTcNoAndBirthdate(Long tcno, LocalDate birthdate) {
         List<UsersCreditDetailsDto> usersCreditDetailList = getRepository().findAllUsersCreditDetailList();
         UsersCreditDetailsDto resultUser = new UsersCreditDetailsDto();
-        logger.info("Users Credit Detail List {}", usersCreditDetailList);
+        logger.info("Users Credit Detail List for search user by birthdate and tcno {}", usersCreditDetailList);
 
         for (UsersCreditDetailsDto usersCreditDetailsDto : usersCreditDetailList) {
             if(Objects.equals(usersCreditDetailsDto.getTCNo(), tcno)

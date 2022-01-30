@@ -5,7 +5,6 @@ import com.aysegulapc.graduation.project.credit.service.entityService.CreditEnti
 import com.aysegulapc.graduation.project.credit.service.strategyService.CreditStrategy;
 import com.aysegulapc.graduation.project.credit.service.strategyService.StrategyFactory;
 import com.aysegulapc.graduation.project.credit.service.strategyService.strategies.FirstCreditScoreService;
-import com.aysegulapc.graduation.project.notification.service.SmsSenderService;
 import com.aysegulapc.graduation.project.user.converter.UserConverter;
 import com.aysegulapc.graduation.project.user.dto.UserDto;
 import com.aysegulapc.graduation.project.user.dto.UserSaveRequestDto;
@@ -13,18 +12,14 @@ import com.aysegulapc.graduation.project.user.entity.User;
 import com.aysegulapc.graduation.project.user.service.UserService;
 import com.aysegulapc.graduation.project.user.service.entityService.UserEntityService;
 import com.aysegulapc.project.user.service.provider.UserDataProvider;
-import org.junit.Ignore;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.*;
 
@@ -60,7 +55,7 @@ class UserServiceTest {
     @Test
     void shouldFindAllUser() {
         List<User> userList = UserDataProvider.getAllUserList();
-        List<UserDto> userDtoList = UserDataProvider.convertUserToSaveRequestDto(userList);
+        List<UserDto> userDtoList = UserDataProvider.convertUserToUserDtoList(userList);
 
         when(userEntityService.findAll()).thenReturn(userList);
 
@@ -68,37 +63,38 @@ class UserServiceTest {
         assertArrayEquals(userDtoList.toArray(), saveUserDtoList.toArray());
     }
 
-    @Test
+    @Test @Disabled
     void shouldNotSaveUser() {
         UserSaveRequestDto userSaveRequestDto = UserDataProvider.getUserSaveRequestDto();
+        User user = UserDataProvider.convertUserSaveRequestDtoToUser(userSaveRequestDto);
         List<User> userList = UserDataProvider.getAllUserList();
-        List<UserDto> userDtoList = UserDataProvider.getAllUserDtoList();
-        UserDto userDto = new UserDto();
+        List<UserDto> userDtoList = UserDataProvider.convertUserToUserDtoList(userList);
 
-       // when(UserConverter.INSTANCE.convertAllUserToUserDtoList(userList)).thenReturn(userDtoList);
         when(userService.findAll()).thenReturn(userDtoList);
-        when(userService.saveUser(userSaveRequestDto)).thenReturn(userDto);
+        //when(userService.saveUser(userSaveRequestDto)).thenReturn(userDto);
+        userService.saveUser(userSaveRequestDto);
 
-        assertThat("Bu TC no ile bir kullanıcı zaten kayıtlı!");
+        assertThrows(RuntimeException.class, () -> userService.findAll());
+
     }
 
-    @Test @Ignore
+    @Test @Disabled
     void shouldSaveUser() {
         UserSaveRequestDto userSaveRequestDto = UserDataProvider.getUserSaveRequestDto();
         User user = UserDataProvider.convertUserSaveRequestDtoToUser(userSaveRequestDto);
+        List<User> userList = UserDataProvider.getAllUserList();
+        StrategyNames strategyName = StrategyNames.FirstCreditScoreService;
 
-        CreditStrategy strategy = strategyFactory.findStrategy(StrategyNames.FirstCreditScoreService);
+        UserDataProvider.convertUserToUserDtoList(userList);
+
+        CreditStrategy strategy = strategyFactory.findStrategy(strategyName);
         strategies = new HashMap<StrategyNames, CreditStrategy>();
-        Set<CreditStrategy> strategySet = null;
-        strategySet.forEach(
-                strategy1 ->strategies.put(strategy.getStrategy(), strategy1));
-        strategies.put(StrategyNames.FirstCreditScoreService, strategy);
+        strategies.put(strategyName, strategy);
 
+        when(strategyFactory.findStrategy(strategyName))
+                .thenReturn(strategies.get(strategyName));
         when(userEntityService.save(user)).thenReturn(user);
-        when(firstCreditScoreService.getStrategy()).thenReturn(StrategyNames.FirstCreditScoreService);
-        when(strategyFactory.findStrategy(StrategyNames.FirstCreditScoreService))
-                .thenReturn(strategies.get(StrategyNames.FirstCreditScoreService));
-        when(userService.findAll()).thenReturn(UserDataProvider.getUserDtoList());
+        when(firstCreditScoreService.getStrategy()).thenReturn(strategyName);
 
         UserDto userDto1 = UserDataProvider.convertUserToUserDto(user);
         UserDto userDto = userService.saveUser(userSaveRequestDto);

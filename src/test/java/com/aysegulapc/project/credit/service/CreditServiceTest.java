@@ -1,8 +1,6 @@
 package com.aysegulapc.project.credit.service;
 
-import com.aysegulapc.graduation.project.common.entity.BaseEntity;
 import com.aysegulapc.graduation.project.credit.dto.CreditResponseDto;
-import com.aysegulapc.graduation.project.credit.entity.CreditResponse;
 import com.aysegulapc.graduation.project.credit.enums.CreditEnum;
 import com.aysegulapc.graduation.project.credit.service.CreditService;
 import com.aysegulapc.graduation.project.credit.service.entityService.CreditEntityService;
@@ -20,7 +18,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(MockitoJUnitRunner.class)
@@ -98,6 +95,20 @@ class CreditServiceTest {
                 user, user.getId(), creditScore, creditResponseDto.getCreditResult(), creditResponseDto.getCreditLimit(), guaranteeRate);
 
         assertEquals(resultCreditResponseDto.getCreditLimit(), new BigDecimal(26000));
+        assertEquals(resultCreditResponseDto.getCreditResult(), CreditEnum.ONAY);
+    }
+
+    @Test
+    void shouldReturnReturnCreditResultWhenGuaranteeAmountIsNull() {
+        User user = UserDataProvider.getGuaranteeAmountIsNullUser();
+        CreditResponseDto creditResponseDto = CreditDataProvider.getThirdCreditResponseDto(user.getId());
+        Long creditScore = 523L;
+
+        CreditResponseDto resultCreditResponseDto = creditService.createCreditResponseDtoByStrategy(
+                user, user.getId(), creditScore, creditResponseDto.getCreditResult(), creditResponseDto.getCreditLimit(), 20L);
+
+        assertEquals(user.getGuaranteeAmount(), new BigDecimal(0));
+        assertEquals(resultCreditResponseDto.getCreditLimit(), new BigDecimal(20000));
         assertEquals(resultCreditResponseDto.getCreditResult(), CreditEnum.ONAY);
     }
 }

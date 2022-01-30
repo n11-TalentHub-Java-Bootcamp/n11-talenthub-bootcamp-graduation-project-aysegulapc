@@ -14,7 +14,7 @@ import java.util.List;
 
 public class UserDataProvider {
 
-    public static List<UserDto> convertUserToSaveRequestDto(List<User> userList) {
+    public static List<UserDto> convertUserToUserDtoList(List<User> userList) {
         return UserConverter.INSTANCE.convertAllUserToUserDtoList(userList);
     }
 
@@ -54,6 +54,20 @@ public class UserDataProvider {
         user.setBirthdate(null);
         user.setGuaranteeAmount(new BigDecimal(4000));
         user.setTCNo(12345678123L);
+
+        return user;
+    }
+
+    public static User getGuaranteeAmountIsNullUser() {
+        User user = new User();
+        user.setId(1L);
+        user.setName("Test name-1");
+        user.setSurname("Test surname-1");
+        user.setSalary(new BigDecimal(6000));
+        user.setPhoneNumber("+905554443311");
+        user.setBirthdate(null);
+        user.setGuaranteeAmount(null);
+        user.setTCNo(12345678523L);
 
         return user;
     }

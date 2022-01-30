@@ -3,6 +3,7 @@ package com.aysegulapc.graduation.project.credit.controller;
 import com.aysegulapc.graduation.project.credit.dto.UsersCreditDetailsDto;
 import com.aysegulapc.graduation.project.credit.service.UserCreditScoreService;
 import com.aysegulapc.graduation.project.credit.service.entityService.CreditEntityService;
+import com.aysegulapc.graduation.project.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,7 +20,6 @@ import java.util.List;
 @Slf4j
 public class CreditController {
 
-    private final UserCreditScoreService userCreditScoreService;
     private final CreditEntityService creditEntityService;
 
     @GetMapping("/users")
@@ -37,9 +37,9 @@ public class CreditController {
         return ResponseEntity.ok(userByTcNoAndBirthdate);
     }
 
-    @GetMapping("/creditScore/{id}")
-    public ResponseEntity getCreditScoreByUserId(@PathVariable Long id) {
-        Long creditScore = userCreditScoreService.findCreditScore(id);
+    @GetMapping("/creditScore")
+    public ResponseEntity getCreditScoreByUserId(@RequestParam UserDto userDto) {
+        Long creditScore = creditEntityService.getUserCreditScore(userDto);
         return ResponseEntity.ok(creditScore);
     }
 }

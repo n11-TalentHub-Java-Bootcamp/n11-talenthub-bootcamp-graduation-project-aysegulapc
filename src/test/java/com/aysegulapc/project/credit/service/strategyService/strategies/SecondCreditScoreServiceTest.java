@@ -44,7 +44,7 @@ class SecondCreditScoreServiceTest {
         Long creditScore = 678L;
         CreditResponseDto creditResponseDto = CreditDataProvider.getSecondCreditResponseDto(user.getId());
 
-        when(userCreditScoreService.findCreditScore(user.getId())).thenReturn(creditScore);
+        when(userCreditScoreService.findCreditScore(user)).thenReturn(creditScore);
         when(creditService.createCreditResponseDtoByStrategy(
                 user,
                 user.getId(),

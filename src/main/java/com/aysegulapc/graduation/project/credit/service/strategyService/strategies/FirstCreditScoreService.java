@@ -27,7 +27,7 @@ public class FirstCreditScoreService implements CreditStrategy {
 
     @Override
     public void calculateCreditResult(User user) {
-        Long creditScore = userCreditScoreService.findCreditScore(user.getId());
+        Long creditScore = userCreditScoreService.findCreditScore(user);
 
         if(creditScore < 500) {
             log.info("User's information is in the first strategy service.");
