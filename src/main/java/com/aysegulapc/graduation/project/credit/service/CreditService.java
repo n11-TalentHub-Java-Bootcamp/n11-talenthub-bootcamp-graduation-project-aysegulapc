@@ -25,6 +25,16 @@ public class CreditService {
 
     private static final Logger logger = LoggerFactory.getLogger(CreditService.class);
 
+    /**
+     * Method returns CreditResponseDto by according to take parameter from strategies.
+     * @param user
+     * @param id
+     * @param creditScore
+     * @param creditEnum
+     * @param creditLimit
+     * @param guaranteeRate
+     * @return CreditResponseDto
+     */
     public CreditResponseDto createCreditResponseDtoByStrategy(
             User user,
             Long id,
