@@ -1,0 +1,12 @@
+.row-size{
+    margin-bottom: 20px;
+}
+
+.phone-number{
+    display: grid;
+}
+
+.title{
+    background: aliceblue;
+    border-radius: 10px;
+}
