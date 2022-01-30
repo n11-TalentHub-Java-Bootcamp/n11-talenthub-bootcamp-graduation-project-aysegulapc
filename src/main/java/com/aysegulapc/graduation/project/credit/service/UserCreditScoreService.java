@@ -15,14 +15,16 @@ public class UserCreditScoreService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserCreditScoreService.class);
 
-    /* This method calculates credit score by user last three digits of
+    /**
+     * This method calculates credit score by user last three digits of
      * tc number. If the last three digits of tc number is lass than
      * 100, then it multiplies with 10. Else, return the last three digits
      * of tc number directly. For example tc number is 34657482045 then
      * credit score is 450. If tc number is 34657482678 then credit score
      * is 678.
+     * @param user
+     * @return Long
      */
-
     public Long findCreditScore(User user) {
         //User user = userEntityService.getById(id);
         if(user == null) {
