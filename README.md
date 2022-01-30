@@ -87,6 +87,8 @@ https://user-images.githubusercontent.com/23243392/151711011-44ccf4e9-f999-4cdd-
 After the user is registered, an SMS is sent to the relevant phone number. The transaction is carried out with 
 a Twilio trial account.
 
+**Note:** Since I use a Twilio trial account, sms can only be sent to the phone numbers defined in the dashboard.
+
 The following message is for the first registered user:
 
 ![whatsapp-image-2022-01-30-at-2](https://user-images.githubusercontent.com/23243392/151711284-0c360230-14f7-4209-89e5-48673bb01410.jpg)
