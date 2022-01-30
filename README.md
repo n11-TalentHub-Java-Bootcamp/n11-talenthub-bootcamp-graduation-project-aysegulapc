@@ -10,7 +10,17 @@ first reload the project in Maven, then clean and install it.
 ```PostgreSql``` was used as database. The ```Hibernate (JPA)``` ORM library was used to transform Java classes 
 into database tables.
 
+Backend side works on ```8080``` port.
+
 **Note**: In order for the application to work, the necessary db configuration settings must be made from the ```application.properties``` file.
+
+#### API Doc
+
+```Swagger``` was used for API documentation. The user's get, delete, post and put operations, as well as querying the credit 
+service by TC number and date of birth, displaying users' credit details and returning a user's credit score can be tested.
+
+![Screen Shot 2022-01-30 at 21 08 30](https://user-images.githubusercontent.com/23243392/151711778-be5ee035-91ae-4eee-ae6a-ffe22d750706.png)
+
 
 ### 2- Frontend Side
 
@@ -22,6 +32,8 @@ Run this command to download the required dependencies:
 Run the following command to start the project:
 
 > npm start
+
+Frontend side works on ```3000``` port.
 
 ## II - Project Details
 
