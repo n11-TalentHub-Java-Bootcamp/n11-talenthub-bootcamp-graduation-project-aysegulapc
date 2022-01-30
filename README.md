@@ -2,9 +2,11 @@
 
 ## I - Introduction
 
-### 1- Backend Side
+A credit system was created, in which the user is registered and the credit result is returned according to the user's information. Credit information is sent as SMS after a user is registered. These users are listed in a table in the interface and editing and deletion operations have been added. In addition, records were queried according to tc number and birthdate. The interface was developed simply with React.
 
-```Maven``` was used as the Java management tool in this project. So to inject the dependencies, 
+### Backend Side
+
+Java 11 is used in this project. Also ```Maven``` was used as the Java management tool in this project. So to inject the dependencies, 
 first reload the project in Maven, then clean and install it.
 
 ```PostgreSql``` was used as database. The ```Hibernate (JPA)``` ORM library was used to transform Java classes 
@@ -14,7 +16,7 @@ Backend side works on ```8080``` port.
 
 **Note**: In order for the application to work, the necessary db configuration settings must be made from the ```application.properties``` file.
 
-#### API Doc
+### API Doc
 
 ```Swagger``` was used for API documentation. The user's get, delete, post and put operations, as well as querying the credit 
 service by TC number and date of birth, displaying users' credit details and returning a user's credit score can be tested.
@@ -22,7 +24,7 @@ service by TC number and date of birth, displaying users' credit details and ret
 ![Screen Shot 2022-01-30 at 21 08 30](https://user-images.githubusercontent.com/23243392/151711778-be5ee035-91ae-4eee-ae6a-ffe22d750706.png)
 
 
-### 2- Frontend Side
+### Frontend Side
 
 A simple interface was made with ```React```. Bootstrap and basic level css were used for the design. 
 Run this command to download the required dependencies:
