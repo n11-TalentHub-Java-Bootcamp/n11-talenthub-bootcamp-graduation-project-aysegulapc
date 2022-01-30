@@ -9,7 +9,6 @@ import com.aysegulapc.graduation.project.user.converter.UserConverter;
 import com.aysegulapc.graduation.project.user.dto.UserDto;
 import com.aysegulapc.graduation.project.user.entity.User;
 import com.aysegulapc.graduation.project.user.service.entityService.UserEntityService;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +27,10 @@ import java.util.stream.Collectors;
 @CrossOrigin
 @Slf4j
 public class CreditEntityService extends BaseEntityService<CreditResponse, CreditRepository> {
+    @Autowired
     private UserEntityService userEntityService;
+
+    @Autowired
     private UserCreditScoreService userCreditScoreService;
 
     private static final Logger logger = LoggerFactory.getLogger(CreditEntityService.class);
