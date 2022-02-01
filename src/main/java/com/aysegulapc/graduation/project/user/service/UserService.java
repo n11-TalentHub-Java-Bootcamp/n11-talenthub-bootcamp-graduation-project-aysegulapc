@@ -57,7 +57,8 @@ public class UserService {
         }
         user = userEntityService.save(user);
         calculateCreditResult(user);
-        sendSms(user);
+        //Commented out because twilio trial account is used.
+        //sendSms(user);
         logger.info("Saved user {}", user);
         UserDto userDto = UserConverter.INSTANCE.convertUserToUserDto(user);
         return userDto;
@@ -94,6 +95,11 @@ public class UserService {
         creditEntityService.deleteCreditDetailByUserId(id);
     }
 
+    /**
+     * This method has been commented out because it uses a twilio demo account.
+     * Therefore, sms cannot be sent to numbers that are not registered on the Twilio dashboard.
+     * @param user
+     */
     private void sendSms(User user) {
         List<UsersCreditDetailsDto> creditDetailList = creditEntityService.findAllUsersCreditDetailList();
         DecimalFormat df = new DecimalFormat("#,###");
